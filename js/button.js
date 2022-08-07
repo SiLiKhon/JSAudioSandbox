@@ -1,4 +1,4 @@
-import {Draggable} from "https://esm.run/melonjs@13.0"
+import { Draggable } from "https://esm.run/melonjs@13.0"
 
 export class Button extends Draggable {
     constructor(x, y, settings) {
