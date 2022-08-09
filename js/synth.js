@@ -39,7 +39,7 @@ export class Synth {
             }
             this.gainNode.gain.cancelScheduledValues(this.ctx.currentTime);
             this.gainNode.gain.setValueAtTime(0, this.ctx.currentTime)
-            this.gainNode.gain.exponentialRampToValueAtTime(1, this.ctx.currentTime + 0.1);
+            this.gainNode.gain.exponentialRampToValueAtTime(0.25, this.ctx.currentTime + 0.1);
             this.osc.connect(this.chain);
         } else {
             throw Error("Synth not initialized.");
@@ -48,7 +48,7 @@ export class Synth {
     stop(delay=0) {
         if (this._isInitialized) {
             this.gainNode.gain.cancelScheduledValues(this.ctx.currentTime + delay);
-            this.gainNode.gain.setValueAtTime(1, this.ctx.currentTime + delay)
+            this.gainNode.gain.setValueAtTime(0.25, this.ctx.currentTime + delay)
             this.gainNode.gain.linearRampToValueAtTime(0, this.ctx.currentTime + delay + 0.5);
         } else {
             throw Error("Synth not initialized.");
