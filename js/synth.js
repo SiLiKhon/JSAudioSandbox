@@ -1,5 +1,5 @@
 var wasm_module = await WebAssembly.compileStreaming(
-    fetch("/js/wasm/distortion.wasm")
+    fetch("./js/wasm/distortion.wasm")
 );
 
 export class Synth {

@@ -31,7 +31,7 @@ device.onReady(async () => {
 
     //     state.change(state.PLAY);
     // });
-    await audio_context.audioWorklet.addModule('/js/processors.js')
+    await audio_context.audioWorklet.addModule('./js/processors.js')
     var screen = new PlayScreen();
     screen.audio_context = audio_context;
     state.set(state.PLAY, screen);
