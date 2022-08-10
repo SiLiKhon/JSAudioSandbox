@@ -13,7 +13,7 @@ import PlayScreen from './js/play_stage.js';
 
 var audio_context = new window.AudioContext();
 
-device.onReady(() => {
+device.onReady(async () => {
     if (!video.init(1218, 562, {parent : "screen", scale : "auto"})) {
         alert("Your browser does not support HTML5 canvas.");
         return;
@@ -31,6 +31,7 @@ device.onReady(() => {
 
     //     state.change(state.PLAY);
     // });
+    await audio_context.audioWorklet.addModule('/js/processors.js')
     var screen = new PlayScreen();
     screen.audio_context = audio_context;
     state.set(state.PLAY, screen);

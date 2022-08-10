@@ -1,3 +1,7 @@
+var wasm_module = await WebAssembly.compileStreaming(
+    fetch("/js/wasm/distortion.wasm")
+);
+
 export class Synth {
     constructor(audioContext, type="square", cutoff=2) {
         this.ctx = audioContext;
@@ -25,7 +29,14 @@ export class Synth {
             this.gainNode = this.ctx.createGain();
             this.gainNode.gain.value = 0;
 
-            this.gainNode.connect(this.filter).connect(this.destination)
+
+            this.dist = new AudioWorkletNode(
+                this.ctx, "distortion", {
+                    processorOptions: {wasm_module}
+                }
+            );
+
+            this.gainNode.connect(this.filter).connect(this.dist).connect(this.destination)
             this.chain = this.gainNode;
 
             this._isInitialized = true;    
